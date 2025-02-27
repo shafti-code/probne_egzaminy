@@ -46,12 +46,11 @@ void roll (int throws)
 {
     int rolled;
     std::vector<int> rolled_array;
-    std::vector<int> valid_points_array;
     std::vector<int> duplicates;
-    srand(std::time(NULL));
+    srand(std::time(0));
     for (int i = 0; i < throws; i++) 
     {
-        rolled = rand() % 6;
+        rolled = rand() % 6 + 1;
         rolled_array.push_back(rolled);
         std::cout << "Kostka " << i << ": " << rolled << std::endl; 
     }
