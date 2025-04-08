@@ -2,7 +2,14 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
-
+/*
+ * nazwa: count_score
+ * opis: funkcja zlicza wynik dodanych do siebie liczb ktore maja duplikat 
+ * vectorze
+ * parametry: vector z wylosowanymi elementami typu danych integer
+ * zwracany typ i opis: zwraca wynik losowania typu integer
+ * autor: pyton_nie_ma_zastosowan_w_profesjonalnym_swiecie_IT_istnieje_lepsza_alternatywa_do_kazdej_jego_zalety_ktora_nie_executuje_sie_w_3_dni_robocze
+ */
 int count_score (std::vector<int> rolled_array) {
     int score = 0;
     std::vector<int> duplicates;
