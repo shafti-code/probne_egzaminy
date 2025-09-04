@@ -16,9 +16,8 @@ class DiceGameApp(QMainWindow):
         """Initialize the user interface"""
         self.setWindowTitle("Gra w kości")
         self.setFixedSize(400, 600)
-        self.setStyleSheet("background-color: #F5F5DC;")  # Beige background
+        self.setStyleSheet("background-color: #F5F5DC;")  
         
-        # Create central widget and main layout
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         
@@ -26,7 +25,6 @@ class DiceGameApp(QMainWindow):
         main_layout.setSpacing(10)
         main_layout.setContentsMargins(20, 10, 20, 10)
         
-        # Title label
         title_label = QLabel("Gra w kości. Autor 12345678901")
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         title_label.setStyleSheet("""
@@ -38,7 +36,6 @@ class DiceGameApp(QMainWindow):
         """)
         main_layout.addWidget(title_label)
         
-        # Roll dice button
         self.roll_button = QPushButton("RZUĆ KOŚĆMI")
         self.roll_button.setStyleSheet("""
             QPushButton {
@@ -57,14 +54,12 @@ class DiceGameApp(QMainWindow):
         self.roll_button.clicked.connect(self.roll_dice)
         main_layout.addWidget(self.roll_button)
         
-        # Dice images layout
         dice_container = QWidget()
         dice_container.setStyleSheet("background-color: white; padding: 10px;")
         dice_layout = QHBoxLayout()
         dice_layout.setSpacing(9)
         dice_layout.setContentsMargins(9, 9, 9, 9)
         
-        # Create 5 dice image labels
         self.dice_labels = []
         for i in range(5):
             dice_label = QLabel()
@@ -78,19 +73,16 @@ class DiceGameApp(QMainWindow):
         dice_container.setLayout(dice_layout)
         main_layout.addWidget(dice_container)
         
-        # Round result label
         self.round_result_label = QLabel("Wynik tego losowania: 0")
         self.round_result_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.round_result_label.setStyleSheet("font-size: 14px; padding: 5px;")
         main_layout.addWidget(self.round_result_label)
         
-        # Game result label
         self.game_result_label = QLabel("Wynik gry: 0")
         self.game_result_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.game_result_label.setStyleSheet("font-size: 14px; padding: 5px;")
         main_layout.addWidget(self.game_result_label)
         
-        # Reset button
         self.reset_button = QPushButton("RESETUJ WYNIK")
         self.reset_button.setStyleSheet("""
             QPushButton {
@@ -113,7 +105,6 @@ class DiceGameApp(QMainWindow):
     
     def set_question_image(self, label):
         """Set question mark image for dice"""
-        # Create a simple question mark placeholder
         label.setText("?")
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         label.setStyleSheet("""
@@ -126,7 +117,6 @@ class DiceGameApp(QMainWindow):
     
     def set_dice_image(self, label, value):
         """Set dice image based on value"""
-        # Create dice representation with dots
         dice_patterns = {
             1: "●",
             2: "●●",
@@ -169,12 +159,10 @@ class DiceGameApp(QMainWindow):
         autor: 12345678901
         ************************************************
         """
-        # Count occurrences of each number
         counts = {}
         for value in dice_values:
             counts[value] = counts.get(value, 0) + 1
         
-        # Calculate points - sum only numbers that appear 2 or more times
         points = 0
         for value, count in counts.items():
             if count >= 2:
@@ -184,43 +172,33 @@ class DiceGameApp(QMainWindow):
     
     def roll_dice(self):
         """Handle roll dice button click"""
-        # Roll 5 dice
         self.dice_values = self.roll_dice_values()
         
-        # Update dice images
         for i, value in enumerate(self.dice_values):
             self.set_dice_image(self.dice_labels[i], value)
         
-        # Calculate round points
         round_points = self.calculate_points(self.dice_values)
         
-        # Update round result
         self.round_result_label.setText(f"Wynik tego losowania: {round_points}")
         
-        # Update game score
         self.game_score += round_points
         self.game_result_label.setText(f"Wynik gry: {self.game_score}")
     
     def reset_game(self):
         """Handle reset button click"""
-        # Reset game score
         self.game_score = 0
         
-        # Reset dice images to question marks
         for label in self.dice_labels:
             self.set_question_image(label)
         
-        # Reset result labels
         self.round_result_label.setText("Wynik tego losowania: 0")
         self.game_result_label.setText("Wynik gry: 0")
 
 def main():
     app = QApplication(sys.argv)
     
-    # Set application style
     app.setStyle('Fusion')
     
-    # Create and show main window
     window = DiceGameApp()
     window.show()
     
