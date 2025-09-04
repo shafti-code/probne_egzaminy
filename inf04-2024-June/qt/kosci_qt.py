@@ -13,7 +13,6 @@ class DiceGameApp(QMainWindow):
         self.init_ui()
         
     def init_ui(self):
-        """Initialize the user interface"""
         self.setWindowTitle("Gra w kości")
         self.setFixedSize(400, 600)
         self.setStyleSheet("background-color: #F5F5DC;")  
@@ -104,7 +103,6 @@ class DiceGameApp(QMainWindow):
         central_widget.setLayout(main_layout)
     
     def set_question_image(self, label):
-        """Set question mark image for dice"""
         label.setText("?")
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         label.setStyleSheet("""
@@ -116,7 +114,6 @@ class DiceGameApp(QMainWindow):
         """)
     
     def set_dice_image(self, label, value):
-        """Set dice image based on value"""
         dice_patterns = {
             1: "●",
             2: "●●",
@@ -171,7 +168,6 @@ class DiceGameApp(QMainWindow):
         return points
     
     def roll_dice(self):
-        """Handle roll dice button click"""
         self.dice_values = self.roll_dice_values()
         
         for i, value in enumerate(self.dice_values):
@@ -185,7 +181,6 @@ class DiceGameApp(QMainWindow):
         self.game_result_label.setText(f"Wynik gry: {self.game_score}")
     
     def reset_game(self):
-        """Handle reset button click"""
         self.game_score = 0
         
         for label in self.dice_labels:
